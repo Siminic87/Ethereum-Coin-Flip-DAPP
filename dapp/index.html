@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Ethereum Coin Flip DAPP</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous"></script>
+    <script type="text/javascript" src="./web3.min.js"></script>
+    <script type="text/javascript" src="./abi.js"></script>
+    <script type="text/javascript" src="./main.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.0/superhero/bootstrap.min.css">
+  </head>
+
+  <body>
+
+    <header>
+
+      <!--Dummy Navbar-->
+      <nav class="navbar navbar-expand-lg navbar-dark bg-light">
+        <a class="navbar-brand" href="#">Coin Flip DAPP</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarColor02">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+    </header>
+
+    <main>
+
+      <!--Shoutout section incl. main game controls (choice of heads vs. tails, insertion of bet amount, start of bet)-->
+      <div class="jumbotron">
+        <div class="container">
+
+          <h1 class="display-3 text-center">Ethereum Coin Flip DAPP</h1>
+          <p class="text-center">Click below to choose your side:</p>
+
+          <!--Choice buttons for heads vs. tails-->
+          <div id="userChoice" class="text-center">
+            <button onClick="headsClicked()" id="heads_button">HEADS</button>
+            <button onClick="tailsClicked()" id="tails_button">TAILS</button>
+            Current Choice Is: <span id="current_choice"><b>N/A</b></span>
+          </div>
+
+          <br>
+
+          <!--Input section for bet amount-->
+          <div class="row">
+            <div class="col-md-6 offset-md-3">
+              <div class="input-group input-group-lg">
+
+                <input type="number" class="form-control" required step=".1" min="0.1" max="2" value="0.1" id="bet_input" placeholder="(Min: 0.1, Max: 2.0)" aria-label="Ether to bet...">
+        			  <!-- <input type="number" class="form-control" required min="0" id="amount" placeholder="WEIs to bet..." aria-label="WEIs to bet..."> -->
+                <span class="input-group-btn">
+                  <button class="btn btn-success btn-lg" type="button" id="start_button">Bet!</button>
+                </span>
+
+              </div>
+            </div>
+          </div>
+
+          <!--Display of result and if bet won or lost-->
+          <h3 id="result" class="text-center"></h3>
+          <h4 id="wonOrLost" class="text-center"></h4>
+
+        </div>
+      </div>
+
+      <!--Three-column explainer section including info on rules, user requirements and funding/emptying contract-->
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <h2>The Rules</h2>
+            <p>Choose "heads" or "tails" and place your bet! Winner doubles amount. Loser loses all!</p>
+            <p><u>Check contract value below:</u></p>
+            <!--<p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p> -->
+            <div id="valueDiv">
+              <button id="value_button">Contract Value</button>
+              <div id="contractVal"></div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <h2>User Requirements</h2>
+            <p>You must install <a href="https://metamask.io/" target="_blank">Metamask</a> in your browser (<a href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn" target="_blank">Get Chrome version here!</a>) to play the game. Currently we are testing in Rinkeby ethereum test-network, so be sure to select it when setup Metamask.</p>
+          </div>
+
+          <div class="col-md-4">
+            <h2>Fund / Empty Contract</h2>
+            <p>This DAPP is being tested on the Ethereum Ropsten testnet. To get some test ether for playing on this site, create an address in Metamask, go to <a href="https://faucet.ropsten.be" target="_blank">faucet.ropsten.be</a> and follow the instructions.</p>
+            <p><u>To fund or withdraw click below:</u></p>
+            <div id="fundingDiv">
+              <div><u>Fund Contract</u></div>
+              <input type="number" id="fund_input">
+              <button id="fund_button">Fund</button>
+            </div>
+            <div id="withdrawDiv">
+              <div><u>Empty Contract (Contract Owner)</u></div>
+              <div><button id="withdraw_button">Empty</button></div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      </main>
+
+    </body>
+
+</html>
